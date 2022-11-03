@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"fmt"
+	p "github.com/TarlexGit/go-grpc-chat/pb/proto"
 
 	"google.golang.org/grpc"
 )

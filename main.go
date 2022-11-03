@@ -4,12 +4,14 @@ import (
 	"fmt"
 	"net"
 
-	p "github.com/TarlexGit/go-grpc-chat/app/pb"
+	p "github.com/TarlexGit/go-grpc-chat/pb/proto"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 )
 
 type MessageServer struct {
+	// grpc.UnsafeFooBarServiceServer
+	p.UnsafeMessageServiceServer
 }
 
 var port = ":8080"
@@ -27,6 +29,7 @@ func (MessageServer) SayIt(ctx context.Context, r *p.Request) (*p.Response, erro
 func main() {
 	server := grpc.NewServer()
 	var messageServer MessageServer
+
 	p.RegisterMessageServiceServer(server, messageServer)
 	listen, err := net.Listen("tcp", port)
 	if err != nil {
