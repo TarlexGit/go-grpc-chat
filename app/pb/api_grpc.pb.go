@@ -2,9 +2,9 @@
 // versions:
 // - protoc-gen-go-grpc v1.2.0
 // - protoc             v3.21.9
-// source: api.proto
+// source: proto/api.proto
 
-package api
+package pb
 
 import (
 	context "context"
@@ -35,7 +35,7 @@ func NewMessageServiceClient(cc grpc.ClientConnInterface) MessageServiceClient {
 
 func (c *messageServiceClient) SayIt(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Response, error) {
 	out := new(Response)
-	err := c.cc.Invoke(ctx, "/api.MessageService/SayIt", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/pb.MessageService/SayIt", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -80,7 +80,7 @@ func _MessageService_SayIt_Handler(srv interface{}, ctx context.Context, dec fun
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/api.MessageService/SayIt",
+		FullMethod: "/pb.MessageService/SayIt",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(MessageServiceServer).SayIt(ctx, req.(*Request))
@@ -92,7 +92,7 @@ func _MessageService_SayIt_Handler(srv interface{}, ctx context.Context, dec fun
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var MessageService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "api.MessageService",
+	ServiceName: "pb.MessageService",
 	HandlerType: (*MessageServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -101,5 +101,5 @@ var MessageService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "api.proto",
+	Metadata: "proto/api.proto",
 }

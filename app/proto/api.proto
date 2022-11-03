@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package pb;
+
+option go_package = "github.com/TarlexGit/go-grpc-chat/app/pb"; 
+
+message Request {
+    string text    = 1;
+    string subtext = 2;
+}
+
+message Response {
+    string text    = 1;
+    string subtext = 2;
+}
+
+service MessageService {
+    rpc SayIt (Request) returns (Response);
+}
